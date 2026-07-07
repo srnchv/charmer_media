@@ -372,21 +372,21 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
   z-index: 25;
   pointer-events: none;
 }
+/* по Frame 18: превью прижато к правому краю с полями 16px, без скруглений */
 .preview-stage__img {
   position: absolute;
-  top: 50%;
-  left: 56%;
-  height: 88vh;
+  top: 16px;
+  bottom: 16px;
+  right: 16px;
+  height: calc(100vh - 32px);
   width: auto;
-  max-width: 46vw;
+  max-width: 55vw;
   object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.45);
-  transform: translate(-50%, -50%) scale(0.97);
+  transform: translateY(10px);
   opacity: 0;
   transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .preview-stage__img.is-active {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translateY(0);
 }
