@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import Hero from './Hero.jsx'
 import { projects, opinion, principles, workScope, formats, clients, assets } from './data.js'
 
-function LeftRail() {
+function LeftRail({ onPreview }) {
   return (
     <aside className="rail rail--left">
       <div className="rail__head">
@@ -10,7 +11,12 @@ function LeftRail() {
       </div>
       <div className="rail__list">
         {projects.map((p) => (
-          <div className="feature" key={p.title}>
+          <div
+            className={`feature${p.preview ? ' feature--interactive' : ''}`}
+            key={p.title}
+            onMouseEnter={p.preview ? () => onPreview(p) : undefined}
+            onMouseLeave={p.preview ? () => onPreview(null) : undefined}
+          >
             <img className="feature__icon" src={p.icon} alt={p.title} />
             <div className="feature__text t-small">
               <span className="feature__year">{p.year}</span>
@@ -164,9 +170,11 @@ function Footer() {
 }
 
 export default function App() {
+  const [preview, setPreview] = useState(null)
+
   return (
-    <>
-      <LeftRail />
+    <div className={preview ? 'is-previewing' : ''}>
+      <LeftRail onPreview={setPreview} />
       <main className="center">
         <Hero />
         <div className="content">
@@ -178,6 +186,20 @@ export default function App() {
         </div>
       </main>
       <RightRail />
-    </>
+
+      <div className="preview-overlay" aria-hidden />
+      <div className="preview-stage" aria-hidden>
+        {projects
+          .filter((p) => p.preview)
+          .map((p) => (
+            <img
+              key={p.title}
+              className={`preview-stage__img${preview === p ? ' is-active' : ''}`}
+              src={p.preview}
+              alt=""
+            />
+          ))}
+      </div>
+    </div>
   )
 }

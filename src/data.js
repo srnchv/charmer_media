@@ -3,7 +3,7 @@ const A = (name) => `${import.meta.env.BASE_URL}assets/${name}`
 export const projects = [
   { year: '2026', title: 'BandLink Media', desc: 'дизайн медиа для музыкального сервиса от Яндекс Музыки', icon: A('proj-bandlink.png') },
   { year: '2026', title: 'Смысловая 226', desc: 'дизайн медиа для нового книжного кластера', icon: A('proj-smyslovaya.png') },
-  { year: '2026', title: 'Inside The Games', desc: 'Новая айдентика и диджитал-платформа для одного из ведущих спортивных медиа', icon: A('proj-itg.png') },
+  { year: '2026', title: 'Inside The Games', desc: 'Новая айдентика и диджитал-платформа для одного из ведущих спортивных медиа', icon: A('proj-itg.png'), preview: A('preview-itg.jpg') },
   { year: '2025', title: 'Большие идеи', desc: 'Айдентика и дизайн сайта для бизнес-медиа от бывшей редакции Harvard Business Review', icon: A('proj-bolshie-idei.png') },
   { year: '2024', title: 'Открытая кухня', desc: 'Айдентика и дизайн-шаблоны сайта для медиа о людях и еде от Яндекс Еды', icon: A('proj-kitchen.png') },
   { year: '2023', title: 'Wol Magazine', desc: 'Дизайн-шаблоны сайта для медиа об архитектуре и интерьерном дизайне', icon: A('proj-wol.png') },

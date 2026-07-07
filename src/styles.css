@@ -77,7 +77,7 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
   background: var(--white);
   z-index: 10;
 }
-.rail--left { left: var(--rail-gap); }
+.rail--left { left: var(--rail-gap); z-index: 30; }
 .rail--right { right: var(--rail-gap); display: flex; flex-direction: column; }
 
 .center {
@@ -112,6 +112,14 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
   gap: 12px;
   padding: 16px 0;
   border-top: 1px solid var(--b10);
+}
+.feature--interactive { cursor: pointer; }
+.feature__icon,
+.feature__text { transition: opacity 0.35s ease; }
+/* при активном превью остальные карточки приглушаются, наведённая — яркая */
+.is-previewing .rail--left .feature:not(:hover) .feature__icon,
+.is-previewing .rail--left .feature:not(:hover) .feature__text {
+  opacity: 0.35;
 }
 .feature__icon {
   width: 80px;
@@ -342,3 +350,43 @@ button { font: inherit; border: 0; background: none; cursor: pointer; }
   top: 78.9%;
 }
 .footer__logo img { width: 100%; }
+
+/* ---------- hover-превью проекта ---------- */
+
+.preview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(245, 244, 242, 0.5);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  transition: opacity 0.4s ease;
+}
+.is-previewing .preview-overlay { opacity: 1; }
+
+.preview-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+}
+.preview-stage__img {
+  position: absolute;
+  top: 50%;
+  left: 56%;
+  height: 88vh;
+  width: auto;
+  max-width: 46vw;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.45);
+  transform: translate(-50%, -50%) scale(0.97);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.preview-stage__img.is-active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
